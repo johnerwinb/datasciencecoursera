@@ -1,0 +1,45 @@
+#add a file
+
+touch<space><filename>
+
+#now you can open this file through windows and edit it.
+
+#commit a file
+
+git add<space>. #this stages all files for committing
+git add<space> filename #stages a file for committing
+
+#push to github
+
+git push origin master
+
+#tells status of files in the directory. Can confirm if a file has been committed.
+
+git status
+
+#see if commit is there
+
+git log
+
+#set proxy
+
+
+git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
+git config --global https.proxy https://proxyuser:proxypwd@proxy.server.com:8080
+
+#use "" for passwords with spaces
+
+#need to add --replace-all when password have "multiple values" because of "space"
+
+git config --global https.proxy https://proxyuser:proxypwd@proxy.server.com:8080
+ --replace-all
+
+# to know if the proxy is in effect
+
+git config --get --global http.proxy
+git config --get --global https.proxy
+
+#to unset proxy
+
+git --global --unset http.proxy
+git --global --unset https.proxy
