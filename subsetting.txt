@@ -1,0 +1,60 @@
+head(airquality)
+attributes(airquality)
+
+#selects obs with Temp>80 and selects variables Ozone and Temp
+subset1 <-subset(airquality, Temp > 80, select = c(Ozone, Temp))
+
+#selects obs with Day = 1. Selects all vars except Temp. Use "==" since "Day" is integer
+subset2 <- subset(airquality, Day == 1, select = -Temp)
+
+#selects all obs and variables FROM Ozone TO Wind
+subset3 <- subset(airquality, select = Ozone:Wind)
+
+#selects values of Ozone where corresponding Temp >80. This will return a vector consisting of the values of Ozone.
+
+with1 <- with(airquality, subset(Ozone, Temp > 80))
+
+#to keep the vars (i.e. utput is not a vector) you use
+with2 <- with(airquality, subset(airquality, Temp > 80))
+
+#using expression below with result in with3=with1
+with3 <- with(airquality, subset(airquality$Ozone, Temp > 80))
+
+## sometimes requiring a logical 'subset' argument is a nuisance
+#documentation of state.x77 in "http://www.inside-r.org/r-doc/datasets/state.abb"
+
+head(state.x77)
+attributes(state.x77)
+
+#get rownames which are the values of the first column
+
+nm <- rownames(state.x77)
+nm
+
+#returns a TRUE and FALSE vector. True when nm (or rowname) that follows the pattern in "grep"
+# "%in%" is a logical operator. grep function is selects values of nm that starts with M.
+# value: if FALSE, a vector containing the (integer) indices of the matches determined by grep is returned. 
+# value: if TRUE, a vector containing the matching elements themselves is returned.
+
+start_with_M <- nm %in% grep("^M", nm, value = TRUE)
+start_with_M
+
+#selects values of state.x77 that is TRUE in "start_with_M". 
+#The third argument (Illiteracy:Murder) specifies the variables to be selected.
+#The pattern in selecting specific states that starts with M is:
+#1) use %in% (logical operator) and grep (fcn) to create a TRUE and FALSE vector, TRUE if the state starts with M and FALSE if otherwise
+#2) use subset to use the TRUE and FALSE vector to select all states are "TRUE"
+#It's like getting the subset of state.x77 and start_with_M = TRUE
+
+subset(state.x77, start_with_M, Illiteracy:Murder)
+
+# but in recent versions of R this can simply be
+
+start_with_M2<- subset(state.x77, grepl("^M", nm), Illiteracy:Murder)
+start_with_M2
+
+#whew!!!
+
+from
+
+http://stat.ethz.ch/R-manual/R-patched/library/base/html/subset.html

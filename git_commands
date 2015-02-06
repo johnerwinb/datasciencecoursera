@@ -8,6 +8,7 @@ touch<space><filename>
 
 git add<space>. #this stages all files for committing
 git add<space> filename #stages a file for committing
+git commit -m "message"
 
 #push to github
 
@@ -41,5 +42,5 @@ git config --get --global https.proxy
 
 #to unset proxy
 
-git --global --unset http.proxy
-git --global --unset https.proxy
+git config --global --unset http.proxy
+git config --global --unset https.proxy
